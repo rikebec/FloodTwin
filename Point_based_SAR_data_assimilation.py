@@ -3,8 +3,7 @@
 """
 Created on Sat Jan 11 13:06:02 2025
 
-This code can be used to conduct a point-based data assimilation 
-(e.g. assimilation of in-situ measurements).
+This code can be used to conduct a point-based data assimilation employing an Ensemble Kalman Filter.
 Here we assimilate soil moisture data into a simple conceptual hydrological model.
 The soil moisture data is SAR-derived soil moisture from the Sentinel-1 mission 
 and was downloaded from https://land.copernicus.eu/en/products/soil-moisture/daily-surface-soil-moisture-v1.0
@@ -19,7 +18,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 #from scipy.stats import norm
 import pandas as pd
-import Model_B
+import Conceptual_Model
 
 #%%
 def initialize_ensemble(N, Param):
@@ -53,7 +52,7 @@ def forecast_ensemble(ensemble, Param, R, PET):
     for i in range(N):
         Ini = tuple(ensemble[i])  # Extract (S1, S2, V1, V2) for this member
         #print(f"Before model call: Ini = {Ini}")
-        Qt, Q1_a, Q2_a, S1_a, S2_a, V1_a, V2_a = Model_B.Model(Param, Ini, R, PET)
+        Qt, Q1_a, Q2_a, S1_a, S2_a, V1_a, V2_a = Conceptual_Model.Model(Param, Ini, R, PET)
         #print(f"After model call: S1_a = {S1_a}, Last S1 = {S1_a[-1]}")
         # Use the last timestep as the new state
         updated_ensemble[i] = [S1_a[-1], S2_a[-1], V1_a[-1], V2_a[-1]]
@@ -149,7 +148,7 @@ for t in range(time_steps):  # Start from t=0
         Ini = (0.5, 0.5, 0, 0)  # Reasonable default values
     '''
     # Ensure R and PET are passed correctly
-    Qt, Q1_a, Q2_a, S1_a, S2_a, V1_a, V2_a = Model_B.Model(
+    Qt, Q1_a, Q2_a, S1_a, S2_a, V1_a, V2_a = Conceptual_Model.Model(
         Param, Ini, R[max(0, t-1):t+1], PET[max(0, t-1):t+1]
     )
 
