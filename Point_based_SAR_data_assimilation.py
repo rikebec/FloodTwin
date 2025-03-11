@@ -51,9 +51,7 @@ def forecast_ensemble(ensemble, Param, R, PET):
     
     for i in range(N):
         Ini = tuple(ensemble[i])  # Extract (S1, S2, V1, V2) for this member
-        #print(f"Before model call: Ini = {Ini}")
         Qt, Q1_a, Q2_a, S1_a, S2_a, V1_a, V2_a = Conceptual_Model.Model(Param, Ini, R, PET)
-        #print(f"After model call: S1_a = {S1_a}, Last S1 = {S1_a[-1]}")
         # Use the last timestep as the new state
         updated_ensemble[i] = [S1_a[-1], S2_a[-1], V1_a[-1], V2_a[-1]]
 

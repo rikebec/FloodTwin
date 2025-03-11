@@ -3,7 +3,7 @@
 """
 Created on Wed Jul 10 16:22:30 2024
 
-@author: rikebecker
+@author: Rike Becker
 
 This code is based on pre-written functions for accessing COSMOS data and slightly adapted for the work within the FloodTwin project.
 It is is used to download precipitation, potential evapotranspiration and soil moisture data at specific UK-COMSOS sites.
@@ -54,6 +54,7 @@ def get_collection_parameter_info(params):
 #%%###########################################
 ######### Downloading a collection ###########
 ##############################################
+
 collection_30M_url = f'{BASE_URL}/collections/30M'
 collection_30M_meta = get_api_response(collection_30M_url)
 
@@ -131,6 +132,7 @@ data_table.to_csv('/.../SM_HOLLN.csv', index=False)
 #%%######################################
 #### query data for specific params #####
 #########################################
+
 # Specify a subset of paramater names
 param_names = ['tdt3_vwc', 'tdt4_vwc'] # these change between daily and 30M resolution. check keys!
 
@@ -148,6 +150,7 @@ pd.api.types.is_datetime64_any_dtype(df['datetime']) # to check if datetime is i
 #%%#############
 #### plots #####
 ################
+
 df_sm_precip = df[["tdt2_vwc", "precip"]]
 axs = df_sm_precip.plot(figsize=(12,8), subplots=True)
 plt.show()
