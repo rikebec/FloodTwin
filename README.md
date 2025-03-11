@@ -1,0 +1,1 @@
+This repository contains code to assimilate SAR-derived soil moisture data into a conceptual hydrological model. It serves as a prove of concept to show how observations from different platforms can be used to improve model performance in a digital twin framework. The code was created in the scope of the NERC funded UK research project 'FloodTwin'.
