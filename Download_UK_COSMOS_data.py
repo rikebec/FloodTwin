@@ -4,8 +4,9 @@
 Created on Wed Jul 10 16:22:30 2024
 
 @author: rikebecker
-code is based on pre-written functions for accessing COSMOS data and slightly adapted for the work within the FloodTwin project.
-This code is used to download precipitation, potential evapotranspiration and soil moisture data at specific UK-COMSOS sites.
+
+This code is based on pre-written functions for accessing COSMOS data and slightly adapted for the work within the FloodTwin project.
+It is is used to download precipitation, potential evapotranspiration and soil moisture data at specific UK-COMSOS sites.
 This data is then used in the data assimilation procedure.
 
 Credit is given to the code published by CEH:
