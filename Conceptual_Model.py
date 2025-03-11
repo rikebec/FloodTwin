@@ -1,7 +1,7 @@
 
 """
 Conceptual Model
-Rainfall-Runoff Modelling & Flood hydrology, 2020
+
 """
 
 import numpy as np

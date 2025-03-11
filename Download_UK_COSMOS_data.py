@@ -10,10 +10,10 @@ code is based on pre-written functions for accessing COSMOS data and slightly ad
 """
 
 from datetime import datetime
-import io
+#import io
 import json
 import requests
-import zipfile
+#import zipfile
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
@@ -51,7 +51,6 @@ def get_collection_parameter_info(params):
 
     return df
 
-
 #%%###########################################
 ######### Downloading a collection ###########
 ##############################################
@@ -85,16 +84,6 @@ def read_json_collection_data(json_response):
         master_df = pd.concat([master_df, site_df])
 
     return master_df
-
-#%%######################################################
-#### query data from multiple sites for current day #####
-#########################################################
-
-#site_ids = ['HOLLN', 'BICKL', 'WRTTL']
-#query_url = f'{BASE_URL}/collections/1D/locations/{";".join(site_ids)}'
-#resp = get_api_response(query_url)
-
-#df = read_json_collection_data(resp)
 
 #%%#########################################################
 #### query data for specific dates and specific sites ######
@@ -137,7 +126,7 @@ plt.show()
 
 data_table = data_table.iloc[:, [0, 3]]
 
-data_table.to_csv('/Users/rikebecker/Documents/Imperial_College_London/FloodTwin/Data/COSMOS_data/SM_HOLLN.csv', index=False)
+data_table.to_csv('/.../SM_HOLLN.csv', index=False)
 
 #%%######################################
 #### query data for specific params #####
@@ -151,16 +140,10 @@ resp = get_api_response(query_url)
 df = read_json_collection_data(resp)
 df.head()
 
-
-
 #%% 
 df['datetime'] = pd.to_datetime(df['datetime'])
 #df['datetime'] = df['datetime'].dt.date
 pd.api.types.is_datetime64_any_dtype(df['datetime']) # to check if datetime is in date format
-
-# to check for length of data
-#df['datetime'].min(), df['datetime'].max()
-#df['datetime'].min() - df['datetime'].max()
 
 #%%#############
 #### plots #####
