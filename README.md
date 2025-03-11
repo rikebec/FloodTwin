@@ -3,7 +3,7 @@
 This repository contains code to assimilate soil moisture data into a conceptual hydrological model employing an Ensemble Kalman Filter.
 It serves as a prove of concept to show how observations from different platforms and of different spatial resolutions can be used to improve model performance in a digital twin framework. In such a framework it is often required to use various data products (e.g. from point-scale in-situ measurements to large-scale remotely sensed data) and use these data sets to continously update the forecasting performance of the digital twin. The code presented here, is a first step to integrate data sets of different spatial and temporal resolutions to update the performance of a hydrological model. This approach can be upscaled to a spatially distributed model and employed with more complex physically-based models, used in digital twin set-ups. The code was created in the scope of the NERC funded UK research project [**FloodTwin**](https://www.hull.ac.uk/work-with-us/more/media-centre/news/2024/innovative-digital-twin-project-will-transform-flooding-forecasting-and-decision-making).
 
-![Image](images/Figure_point_based_DA.png)
+![Image](images/Figure_1.png)
 Be aware: the content will be frequently updated in the next days. (Last edits: March 11th, 2025)
 
 ## Point-based data assimilation
