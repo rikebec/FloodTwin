@@ -5,6 +5,8 @@ Created on Wed Jul 10 16:22:30 2024
 
 @author: rikebecker
 code is based on pre-written functions for accessing COSMOS data and slightly adapted for the work within the FloodTwin project.
+
+Credit is given to the code published by CEH:
 # Please see https://cosmos-api.ceh.ac.uk/python_examples for code examples
 # Please see https://cosmos-api.ceh.ac.uk/docs for more details
 """
@@ -38,8 +40,6 @@ def get_api_response(url, csv=False):
     
 
 def get_collection_parameter_info(params):
-    """ A function for wrangling the collection information into a more visually appealing format!
-    """
     df = pd.DataFrame.from_dict(params)
     df = df.T[['label', 'description', 'unit', 'sensorInfo']]
 
