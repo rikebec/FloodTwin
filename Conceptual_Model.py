@@ -2,6 +2,7 @@
 """
 Conceptual Model
 
+@author: Anthanasios Paschalis
 """
 
 import numpy as np
