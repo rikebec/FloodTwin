@@ -5,6 +5,8 @@ Created on Wed Jul 10 16:22:30 2024
 
 @author: rikebecker
 code is based on pre-written functions for accessing COSMOS data and slightly adapted for the work within the FloodTwin project.
+This code is used to download precipitation, potential evapotranspiration and soil moisture data at specific UK-COMSOS sites.
+This data is then used in the data assimilation procedure.
 
 Credit is given to the code published by CEH:
 # Please see https://cosmos-api.ceh.ac.uk/python_examples for code examples
@@ -12,14 +14,11 @@ Credit is given to the code published by CEH:
 """
 
 from datetime import datetime
-#import io
 import json
 import requests
-#import zipfile
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
-
 
 #%%###########################################################################
 ########################## Defining Functions ################################
