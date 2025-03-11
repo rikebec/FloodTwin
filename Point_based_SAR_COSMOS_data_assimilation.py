@@ -110,30 +110,29 @@ Param = (Zr,n1,Ks,Ksb,Zg,n2,b,c,d,T1,T2,DT)
 Ini = (S1,S2,V1,V2)
 
 #%% load the data
-I_dir1 ='~/.../COSMOS_data/' #load COSMOS soil moisture data
-I_dir2 ='~/.../SAR_soil_moisture_data_at_COSMOS_sites/' #load SAR data extracted at the same COSMOS site
+I_dir ='~/.../Data/' 
 
 # Precipitation
-R = pd.read_csv(I_dir1+'Precip_HOLLN.csv')['precip'].to_numpy()  # precipitation (mm/day)
+R = pd.read_csv(I_dir+'Precip_HOLLN.csv')['precip'].to_numpy()  # precipitation (mm/day)
 R = np.tile(R, 2) # add two years for warm-up
 R = pd.Series(R).interpolate(method='linear').to_numpy() #to get rid of any nan values, using a simple linear interpolation
 # Potential ET
-PET = pd.read_csv(I_dir1+'PET_HOLLN.csv')['pe'].to_numpy() #  potential ET (mm/day)
+PET = pd.read_csv(I_dir+'PET_HOLLN.csv')['pe'].to_numpy() #  potential ET (mm/day)
 PET = np.tile(PET, 2)
 PET = pd.Series(PET).interpolate(method='linear').to_numpy()
 # Soil moisture remote sensing (SAR/Sentinel-1)
-observations = pd.read_csv(I_dir2+'SM_SAR_HOLLN_2023_2024.csv')['ssm'].to_numpy() # read the SAR soil moisture data at HOLLIN HILL (here for the years 2023-2024)
+observations = pd.read_csv(I_dir+'SM_SAR_HOLLN_2023_2024.csv')['ssm'].to_numpy() # read the SAR soil moisture data at HOLLIN HILL (here for the years 2023-2024)
 observations = observations/100
 observations = np.tile(observations, 2)
 # Soil moisture COSMOS
-cosmos_soil_moisture = pd.read_csv(I_dir1+'SM_HOLLN.csv') #COSMOS soil moisture
+cosmos_soil_moisture = pd.read_csv(I_dir+'SM_HOLLN.csv') #COSMOS soil moisture
 cosmos_soil_moisture = cosmos_soil_moisture['soil_moisture'].to_numpy()  # COSMOS soil moisture
 cosmos_soil_moisture = (cosmos_soil_moisture/100)
 cosmos_soil_moisture = np.tile(cosmos_soil_moisture, 2)
 
 # Assume time1 and time2 correspond to the timestamps of observations_1 and observations_2 datasets
-time1 = pd.read_csv(I_dir2+'SM_SAR_HOLLN_2023_2024.csv')['date'].to_numpy()  # Timestamps for first dataset
-time2 = pd.read_csv(I_dir1+'SM_HOLLN.csv')['datetime'].to_numpy()  # Timestamps for second dataset
+time1 = pd.read_csv(I_dir+'SM_SAR_HOLLN_2023_2024.csv')['date'].to_numpy()  # Timestamps for first dataset
+time2 = pd.read_csv(I_dir+'SM_HOLLN.csv')['datetime'].to_numpy()  # Timestamps for second dataset
 
 observations_1 = observations # SAR data
 observations_2 = cosmos_soil_moisture # COSMOS data
