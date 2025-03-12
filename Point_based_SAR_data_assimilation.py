@@ -79,8 +79,7 @@ def update_ensemble(ensemble, observation, obs_error):
     return updated_ensemble
 
 #%%
-I_dir1 ='~/Documents/Imperial_College_London/FloodTwin/Data/COSMOS_data/'
-I_dir2 ='~/Documents/Imperial_College_London/FloodTwin/Data/SAR_soil_moisture_Vienna_at_COSMOS_sites/'
+I_dir ='~/Data/'
 
 # Parameters
 N = 100  # Number of ensemble members
@@ -110,15 +109,15 @@ Param = (Zr,n1,Ks,Ksb,Zg,n2,b,c,d,T1,T2,DT)
 Ini = (S1,S2,V1,V2)
 
 # load data
-R = pd.read_csv(I_dir1+'Precip_HOLLN.csv')['precip'].to_numpy()  # precipitation (mm/day)
+R = pd.read_csv(I_dir+'Precip_HOLLN.csv')['precip'].to_numpy()  # precipitation (mm/day)
 R = np.tile(R, 2)
 R = pd.Series(R).interpolate(method='linear').to_numpy() #to get rid of any nan values, using a simple linear interpolation
 
-PET = pd.read_csv(I_dir1+'PET_HOLLN.csv')['pe'].to_numpy() #  potential ET (mm/day)
+PET = pd.read_csv(I_dir+'PET_HOLLN.csv')['pe'].to_numpy() #  potential ET (mm/day)
 PET = np.tile(PET, 2)
 PET = pd.Series(PET).interpolate(method='linear').to_numpy()
 
-observations = pd.read_csv(I_dir2+'SM_SAR_HOLLN_2023_2024.csv')['ssm'].to_numpy()
+observations = pd.read_csv(I_dir+'SM_SAR_HOLLN_2023_2024.csv')['ssm'].to_numpy()
 observations = observations/100
 observations = np.tile(observations, 2)
 
@@ -201,7 +200,7 @@ for t in range(time_steps):
     assimilated_soil_moisture[t] = np.nanmean(ensemble[:, 0]) # Extract S1 only
 
 
-cosmos_soil_moisture = pd.read_csv(I_dir1+'SM_HOLLN.csv') #COSMOS soil moisture
+cosmos_soil_moisture = pd.read_csv(I_dir+'SM_HOLLN.csv') #COSMOS soil moisture
 cosmos_soil_moisture = cosmos_soil_moisture['soil_moisture'].to_numpy()  # COSMOS soil moisture
 cosmos_soil_moisture = (cosmos_soil_moisture/100)
 cosmos_soil_moisture = np.tile(cosmos_soil_moisture, 2)
@@ -274,8 +273,4 @@ plt.gca().text(0.02, 0.03, textstr, transform=plt.gca().transAxes, fontsize=10,
                verticalalignment='bottom', bbox=dict(facecolor='white', alpha=0.8, edgecolor='gray', boxstyle='round,pad=0.5'))
 
 plt.show()
-
-#check ssm data uncertainty of data product
-#update model parameters
-#spin up the model
 
